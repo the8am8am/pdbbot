@@ -1,0 +1,9 @@
+// PDB mIRC BOT - WELCOME MESSAGE COUNTER - Automatic each 20 lines of text - Moderators can force message with !welcome (script in General Text Commands).
+
+on *:text:*:#: {
+  inc %msgCounter
+  if (%msgCounter > 20) {
+    msg # Are you enjoying yourself, chillin, lurkin, chattin?  Be sure to hit that follow button, it's really appreciated!  Be sure to check my twitter to stay up to date with when I go live: @propdannyb
+    set %msgCounter 1
+  }
+}

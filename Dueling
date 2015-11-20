@@ -1,0 +1,101 @@
+//DUELING - SIMPLE D6 ROLL DUELING SYSTEM FOR TWITCH.TV IRC CHAT
+
+on *:TEXT:!dueling*:#: {
+  if ($2 == on) { 
+    if ($nick isop #) {  
+      set %dueling 1
+      set %openduel 1
+      msg $chan DUELING ENABLED, prepare the anuses!!!
+    }
+    else {
+      msg $chan $nick you are not mod enough to do this!
+    }
+  }
+  if ($2 == off) { 
+    if ($nick isop #) {
+      unset %dueling
+      unset %openduel
+      unset %player1
+      unset %player2
+      unset %theduel
+      unset %p1
+      unset %p2
+      msg $chan DUELING DISABLED, we've already seen too much bloodshed...
+    } 
+    else {
+      msg $chan $nick you are not mod enough to do this!
+    }
+  }
+}
+
+on *:TEXT:!duel*:#: {
+  if (%dueling == 1) {
+    if ($2 == accept) {
+      if ($nick == %player2) {
+        msg $chan %player1 and %player2 met terms and prepared... Themselves.  Let the battle commence!
+        set %openduel 1 
+        set %p1 $rand(1,6)
+        set %p2 $rand(1,6)
+        if (%p1 == 1) { msg $chan %player1 fumbles their weapon. It goes off in their face.  %player1 is useless and dead! }
+        if (%p1 == 2) { msg $chan %player1 shoots... It's a misfire! }
+        if (%p1 == 3) { msg $chan %player1 shoots... The shot barely grazes its target! }
+        if (%p1 == 4) { msg $chan %player1 shoots... The shot hits %player2 $+ , it's a fleshwound! }
+        if (%p1 == 5) { msg $chan %player1 shoots... Expert precision, they hit %player2 right in a soft bit!  }
+        if (%p1 == 6) { msg $chan %player1 waves their weapon around like an expert, without looking, fires a single headshot. Clinical! %player2 is dead! }
+        if (%p2 == 1) { 
+          msg $chan %player2 draws a weapon, it goes off in their hand.  %player2 is useless and dead! 
+          if (%p1 == 1) { 
+            msg $chan Typical, both too big for their own boots, %player1 and %player2 couldn't even handle their own weapons.  They both killed themselves.  It's a draw. 
+            unset %player1
+            unset %player2
+            halt
+          }
+        }
+        if (%p2 == 2) { msg $chan %player2 shoots... It's a misfire! }
+        if (%p2 == 3) { msg $chan %player2 shoots... The shot barely grazes its target! }
+        if (%p2 == 4) { msg $chan %player2 shoots... The shot hits %player1 $+ , it's a fleshwound! }
+        if (%p2 == 5) { msg $chan %player2 shoots... Expert precision, they hit %player1 right in a soft bit! }
+        if (%p2 == 6) { 
+          msg $chan %player2 waves their weapon around like an expert, without looking, fires a single headshot. %player1 is dead! 
+          if (%p1 == 6) { 
+            msg $chan Wait, what... Both duelists were able to kill each other with a single headshot... It's an expert draw. %player1 and $player2 are both dead! 
+            unset %player1
+            unset %player2
+            halt
+          }
+        }
+        if (%p1 > %p2) { msg $chan %player1 wins! }
+        else if (%p2 > %p1) { msg $chan %player2 wins! }
+        else { msg $chan It's a draw! }
+        unset %player1
+        unset %player2
+        halt
+      }
+      else {
+        msg $chan $nick you have not been challenged to a Duel.
+        halt
+      }
+    } 
+    if (%openduel == 1) {
+      if ($2 ison #) {
+        if ($2 == $nick)  {
+          msg $chan $nick you shouldn't play with yourself, you'll go blind!
+        }
+        else {
+          msg $chan $2 you have been challenged by $nick $+ , you have 20 seconds to type <!duel accept> !!!
+          set %openduel 0
+          set %player1 $nick
+          set %player2 $2
+          timer 1 20 set %openduel 1
+        }
+      }
+      else {
+        msg $chan $nick it doesn't look like $2 is on this channel.  If they have just joined, please give Twitch a minute to catch up.
+      }
+    }
+    else { msg $chan A challenge has already been placed, please wait for the current Duel to finish! }
+  }
+  else { 
+    msg $chan $nick $+ , all <!duel> commands are disabled.  Please ask a mod to allow Duels.  
+  } 
+}

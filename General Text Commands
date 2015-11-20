@@ -1,0 +1,114 @@
+//PDB mIRC BOT - TEXT COMMANDS - All commands have spam protection - each individual person can use each command only once every 30 seconds.
+
+// General - !botcommands, !halp, !fail, !pcspecs, !steam, !repost
+// Social Media - !twitter, !youtube 
+// Referral Links - !razer, !amazon, !gmg 
+// Viewer Commands - !bambam, !dino, !evilbunny, !palalizerd
+// Mod Only Commands - !welcome
+
+on *:text:!botcommands:#: {
+  if ($($+(%,spambotcommands.,$nick),2)) {return}
+  set -u30 %spambotcommands. S+ $nick On 
+  msg # Bot Commands - !pcspecs, !steam, !repost, !twitter, !youtube, !razer, !amazon, !gmg, !bambam, !dino, !evilbunny, palalizerd
+}
+
+on *:text:!halp:#: {
+  if ($($+(%,spamhalp.,$nick),2)) {return}
+  set -u30 %spamhalp. S+ $nick On 
+  msg # /me is freaking out!
+}  
+
+on *:text:!fail:#: {
+  if ($($+(%,spamfail.,$nick),2)) {return}
+  set -u30 %spamfail. S+ $nick On 
+  msg # failfish Danny, do you even play?
+}
+
+on *:text:!pcspecs:#: {
+  if ($($+(%,spampcspecs.,$nick),2)) {return}
+  set -u30 %spampcspecs. S+ $nick On 
+  msg # Danny's PC Specs are: Intel Core i7-4790K Haswell Quad-Core 4.4GHz, Asus GTX 780Ti, Asus Hero VII maximus Z97, 16GB Corsair Vengance Pro
+}
+
+on *:text:!steam:#: {
+  if ($($+(%,spamsteam.,$nick),2)) {return}
+  set -u30 %spamsteam. S+ $nick On 
+  msg # Get connected to the Crusader's Watch Steam Group: http://steamcommunity.com/groups/crusaderswatch
+}
+
+on *:text:!repost:#: {
+  if ($($+(%,spamrepost.,$nick),2)) {return}
+  set -u30 %spamrepost. S+ $nick On 
+  msg # Looking to get Danny's attention?  Make sure you type "Danny" in your message to highlight on his screen!
+}
+
+// SOCIAL MEDIA
+
+on *:text:!twitter:#: {
+  if ($($+(%,spamtwitter.,$nick),2)) {return}
+  set -u30 %spamtwitter. S+ $nick On 
+  msg # Add me on Twitter: https://twitter.com/propdannyb
+}
+
+on *:text:!youtube:#: {
+  if ($($+(%,spamyoutube.,$nick),2)) {return}
+  set -u30 %spamyoutube. S+ $nick On 
+  msg # Watch my past broadcasts on Youtube: https://www.youtube.com/channel/UCg4OXWzmS10v11mNR4XymmQ
+}
+
+// REFERRAL LINKS
+
+on *:text:!razer:#: {
+  if ($($+(%,spamrazer.,$nick),2)) {return}
+  set -u30 %spamrazer. S+ $nick On 
+  msg # Get exclusive deals using this razer referral link: http://send.onenetworkdirect.net/z/608299/CD226539/
+}
+
+on *:text:!amazon:#: {
+  if ($($+(%,spamamazon.,$nick),2)) {return}
+  set -u30 %spamamazon. S+ $nick On 
+  msg # Danny is a part of Amazon's Associates Program - save on your orders using this referral link: http://www.amazon.com/?_encoding=UTF8&camp=1789&creative=390957&linkCode=ur2&tag=crusawatch-20&linkId=KFXUCFWYLJZFAP4U
+}
+
+on *:text:!gmg:#: {
+  if ($($+(%,spamgmg.,$nick),2)) {return}
+  set -u30 %spamgmg. S+ $nick On 
+  msg # Get deals with Greenman Gaming using this referral link: http://www.greenmangaming.com/?gmgr=zoyaqiko
+}
+
+	// VIEWERS
+
+on *:text:!bambam:#: {
+  if ($($+(%,spambambam.,$nick),2)) {return}
+  set -u30 %spambambam. S+ $nick On 
+  msg # <ᴍᴇssᴀɢᴇ ᴅᴏɴɢᴇʀᴇᴅ> 
+}
+	
+on *:text:!dino:#: {
+  if ($($+(%,spamdino.,$nick),2)) {return}
+  set -u30 %spamdino. S+ $nick On 
+  msg # (づ｡◕‿‿◕｡)づ passing out hugs!! (づ｡◕‿‿◕｡)づ
+}
+
+on *:text:!evilbunny:#: {
+  if ($($+(%,spamevilbunny.,$nick),2)) {return}
+  set -u30 %spamevilbunny. S+ $nick On 
+  msg # The Twitch Overlord is here!!!!!
+  msg # /me Hides
+}
+
+on *:text:!palalizerd:#: {
+  if ($($+(%,spampala.,$nick),2)) {return}
+  set -u30 %spampala. S+ $nick On 
+  msg # Oh Hai Princess xxx 
+}
+
+	// MOD ONLY COMMANDS
+	
+on *:text:!welcome:#: {
+  if ($nick isop #) {
+    if ($($+(%,spamwelcome.,$nick),2)) {return}
+    set -u30 %spamwelcome. S+ $nick On 
+    msg # Are you enjoying yourself, chillin, lurkin, chattin?  Be sure to hit that follow button, it's really appreciated!  Be sure to check my twitter to stay up to date with when I go live: @propdannyb
+  }
+}
